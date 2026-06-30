@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问卷助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- 头部 -->
+    <header class="header">
+      <h1>📋 问卷助手</h1>
+      <span class="version">v1.0</span>
+    </header>
+
+    <!-- 问卷信息 -->
+    <section class="section" id="survey-info">
+      <div class="info-row">
+        <span class="info-label">当前页面</span>
+        <span class="info-value" id="info-status">未检测到问卷</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">适配器</span>
+        <span class="info-value" id="info-adapter">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">答题进度</span>
+        <span class="info-value" id="info-progress">-</span>
+      </div>
+    </section>
+
+    <!-- 功能开关 -->
+    <section class="section">
+      <h2>功能开关</h2>
+      <div class="toggle-row">
+        <span>⌨️ 键盘快捷键</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-keyboard" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span>📝 快速填片</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-snippets" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span>⚠️ 陷阱题提醒</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-attention" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span>📊 进度追踪</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-progress" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 快捷操作 -->
+    <section class="section">
+      <h2>快捷操作</h2>
+      <div class="action-buttons">
+        <button id="btn-fill-all" class="btn-fill">🚀 一键填充整页</button>
+        <button id="btn-auto-pilot" class="btn-auto-pilot">🤖 自动答题 (5-10s)</button>
+        <button id="btn-grade" class="btn-grade">🏷️ 分级标记选项</button>
+      </div>
+      <p class="action-hint">快捷键: <kbd>Ctrl+Shift+A</kbd> 自动 / <kbd>Alt+Shift+F</kbd> 填充 / <kbd>Esc</kbd> 停止</p>
+    </section>
+
+    <!-- 微信模式 -->
+    <section class="section">
+      <h2>📱 微信 UA 伪装</h2>
+      <div class="toggle-row">
+        <span>伪装为微信浏览器</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-wechat">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <p class="action-hint">开启后可绕过"请在微信中打开"限制（刷新页面生效）</p>
+    </section>
+
+    <!-- 快捷键速查 -->
+    <section class="section">
+      <h2>快捷键速查</h2>
+      <div class="shortcut-grid">
+        <div class="shortcut-item">
+          <kbd>1</kbd>-<kbd>9</kbd>
+          <span>选择对应选项</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>0</kbd>
+          <span>清除当前选择</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Tab</kbd>
+          <span>下一题/下一页</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Shift</kbd>+<kbd>Tab</kbd>
+          <span>上一题</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>
+          <span>快速填片</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>↑</kbd><kbd>↓</kbd>
+          <span>上下切换题目</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部按钮 -->
+    <footer class="footer">
+      <button id="btn-options" class="btn-secondary">⚙️ 设置</button>
+      <button id="btn-refresh" class="btn-primary">🔄 刷新状态</button>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

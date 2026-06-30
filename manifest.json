@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "问卷助手 - 高效填写问卷调查",
+  "version": "1.0.0",
+  "description": "键盘快捷键、快速填片、陷阱题提醒、进度追踪——帮你更高效地完成问卷调查。",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "utils/storage.js",
+        "content/adapters/base.js",
+        "content/adapters/wenjuanxing.js",
+        "content/adapters/1diaocha.js",
+        "content/adapters/idiaocha.js",
+        "content/adapters/toupiao.js",
+        "content/adapters/nfield.js",
+        "content/adapters/tencent.js",
+        "content/snippets.js",
+        "content/keyboard.js",
+        "content/attention.js",
+        "content/consistency.js",
+        "content/ai.js",
+        "content/suggest.js",
+        "content/autofill.js",
+        "content/wechat.js",
+        "content/progress.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "问卷助手",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background.js"
+  }
+}

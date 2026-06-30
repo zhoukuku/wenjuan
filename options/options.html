@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问卷助手 - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-container">
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">📋 问卷助手</div>
+      <ul class="nav-list">
+        <li class="nav-item active" data-tab="snippets">📝 快速填片</li>
+        <li class="nav-item" data-tab="shortcuts">⌨️ 快捷键</li>
+        <li class="nav-item" data-tab="ai">🤖 AI 答题</li>
+        <li class="nav-item" data-tab="platforms">🌐 平台设置</li>
+        <li class="nav-item" data-tab="about">ℹ️ 关于</li>
+      </ul>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <!-- 片段管理 -->
+      <section class="tab-content active" id="tab-snippets">
+        <h2>快速填片管理</h2>
+        <p class="desc">预设常用信息，填问卷时按 <kbd>Ctrl+Shift+F</kbd> 快速插入。</p>
+
+        <div class="snippet-list" id="snippet-list">
+          <!-- 动态渲染 -->
+        </div>
+
+        <div class="add-snippet-form">
+          <input type="text" id="new-label" placeholder="标签（如：姓名）" maxlength="20">
+          <input type="text" id="new-value" placeholder="值（如：张三）" maxlength="200">
+          <button id="btn-add" class="btn-primary">+ 添加</button>
+        </div>
+
+        <div class="action-bar">
+          <button id="btn-reset-snippets" class="btn-danger">恢复默认</button>
+          <button id="btn-save-snippets" class="btn-primary">保存更改</button>
+        </div>
+        <p class="save-hint" id="snippet-hint"></p>
+      </section>
+
+      <!-- 快捷键说明 -->
+      <section class="tab-content" id="tab-shortcuts">
+        <h2>快捷键参考</h2>
+        <p class="desc">在问卷页面中可直接使用以下快捷键：</p>
+        <table class="shortcut-table">
+          <thead>
+            <tr><th>快捷键</th><th>功能</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><kbd>1</kbd> - <kbd>9</kbd></td><td>选择选项</td><td>单选立即选中，多选切换勾选</td></tr>
+            <tr><td><kbd>1</kbd> <kbd>2</kbd></td><td>选第12项</td><td>连续按两个数字选择超过9的选项</td></tr>
+            <tr><td><kbd>0</kbd></td><td>清除选择</td><td>清空当前题目的所有已选项</td></tr>
+            <tr><td><kbd>Tab</kbd> / <kbd>Enter</kbd></td><td>下一题</td><td>最后一题时自动翻页</td></tr>
+            <tr><td><kbd>Shift</kbd> + <kbd>Tab</kbd></td><td>上一题</td><td>第一题时尝试返回上一页</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd></td><td>快速填片</td><td>对输入框弹出预设内容面板</td></tr>
+            <tr><td><kbd>↑</kbd> <kbd>↓</kbd> / <kbd>j</kbd> <kbd>k</kbd></td><td>切换题目</td><td>上下移动当前聚焦的题目</td></tr>
+          </tbody>
+        </table>
+        <p class="note">💡 提示：快捷键仅在问卷页面生效，不会影响其他网站的正常浏览。</p>
+      </section>
+
+      <!-- AI 答题 -->
+      <section class="tab-content" id="tab-ai">
+        <h2>🤖 AI 智能答题</h2>
+        <p class="desc">接入 AI 大模型，智能分析题目并推荐最合理的答案。支持所有兼容 OpenAI API 格式的模型。</p>
+
+        <div class="setting-card">
+          <h3>启用 AI</h3>
+          <label class="switch-label">
+            <input type="checkbox" id="ai-enabled">
+            <span>启用 AI 推荐（优先级最高）</span>
+          </label>
+        </div>
+
+        <div class="setting-card">
+          <h3>快速选择预设模型</h3>
+          <div class="preset-buttons">
+            <button class="btn-preset" data-preset="deepseek">DeepSeek</button>
+            <button class="btn-preset" data-preset="minimax">MiniMax</button>
+            <button class="btn-preset" data-preset="qwen">通义千问</button>
+            <button class="btn-preset" data-preset="glm">智谱 GLM</button>
+            <button class="btn-preset" data-preset="openai">OpenAI</button>
+          </div>
+        </div>
+
+        <div class="setting-card">
+          <h3>API 配置</h3>
+          <div class="form-group">
+            <label>API 地址 (Endpoint)</label>
+            <input type="text" id="ai-endpoint" placeholder="https://api.deepseek.com/v1">
+          </div>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="password" id="ai-key" placeholder="sk-...">
+          </div>
+          <div class="form-group">
+            <label>模型名称 (Model)</label>
+            <input type="text" id="ai-model" placeholder="deepseek-chat">
+          </div>
+
+          <button id="btn-test-ai" class="btn-secondary">🔬 测试连接</button>
+          <span id="ai-test-result"></span>
+        </div>
+
+        <div class="setting-card">
+          <h3>获取 API Key</h3>
+          <ul class="api-links">
+            <li><a href="https://platform.deepseek.com/api_keys" target="_blank">DeepSeek →</a> 新用户送 500 万 tokens</li>
+            <li><a href="https://platform.minimaxi.com/user-center/basic-information/interface-key" target="_blank">MiniMax →</a></li>
+            <li><a href="https://dashscope.console.aliyun.com/apiKey" target="_blank">通义千问 →</a></li>
+            <li><a href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank">智谱 GLM →</a></li>
+          </ul>
+        </div>
+
+        <div class="action-bar">
+          <button id="btn-save-ai" class="btn-primary">💾 保存 AI 配置</button>
+        </div>
+        <p class="save-hint" id="ai-hint"></p>
+      </section>
+
+      <!-- 平台设置 -->
+      <section class="tab-content" id="tab-platforms">
+        <h2>平台适配</h2>
+        <p class="desc">插件会自动识别以下平台并使用对应的适配策略：</p>
+        <ul class="platform-list">
+          <li>✅ 问卷星 (wjx.cn / sojump.com)</li>
+          <li>✅ 第一调查网 (1diaocha.com)</li>
+          <li>✅ 爱调查 (idiaocha.com)</li>
+          <li>✅ 投吧 (toupiao.com)</li>
+          <li>✅ 集思吧 (jisiba.com)</li>
+          <li>✅ 速调吧 (sutiaoba.com)</li>
+          <li>✅ CTR调研社区 (ctrchina.cn)</li>
+          <li>🔄 其他平台（通用适配器）</li>
+        </ul>
+        <p class="note">💡 未在列表中的平台将使用通用适配器，基于 DOM 语义自动识别题目结构。</p>
+      </section>
+
+      <!-- 关于 -->
+      <section class="tab-content" id="tab-about">
+        <h2>关于问卷助手</h2>
+        <p class="desc">帮助真实用户更高效地完成问卷调查，所有操作由用户手动执行。</p>
+
+        <div class="about-card">
+          <h3>🎯 设计理念</h3>
+          <ul>
+            <li><strong>辅助而非替代</strong>：所有作答由用户亲自执行，插件仅减少机械操作</li>
+            <li><strong>键盘优先</strong>：减少鼠标点击次数，提高填写效率</li>
+            <li><strong>隐私优先</strong>：所有数据存储在浏览器本地，不上传任何信息</li>
+            <li><strong>透明提醒</strong>：陷阱题仅做高亮提示，不替用户做决定</li>
+          </ul>
+        </div>
+
+        <div class="about-card">
+          <h3>📊 使用统计</h3>
+          <div id="stats-container">
+            <p>已完成问卷：<strong id="stat-surveys">0</strong> 份</p>
+            <p>累计答题：<strong id="stat-questions">0</strong> 题</p>
+            <p>平均每题用时：<strong id="stat-time">-</strong> 秒</p>
+          </div>
+        </div>
+
+        <p class="note">版本 1.0.0 · 仅在 Chrome 浏览器中运行</p>
+      </section>
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
